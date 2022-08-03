@@ -8,11 +8,11 @@ export const useLogin = ({ onSuccess }) => {
       toast.success("Login Successful");
       localStorage.setItem("loginInfo", JSON.stringify(data));
 
-      // if (data?.isAdmin) {
-      //   window.location.href = "/admin";
-      // } else {
-      //   window.location.href = "/";
-      // }
+      if (data?.isAdmin) {
+        window.location.href = "/admin";
+      } else {
+        window.location.href = "/";
+      }
 
       onSuccess && onSuccess(data, variables, context);
     },

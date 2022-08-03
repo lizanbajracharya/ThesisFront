@@ -5,10 +5,13 @@ import { QueryClient, QueryClientProvider } from "react-query";
 import UserRoute from "./router/UserRoute";
 import { theme } from "./theme";
 import "react-toastify/dist/ReactToastify.css";
+import AppRoute from "./router/AppRoute";
 
 const queryClient = new QueryClient();
 
 function App() {
+  const loginInfo = JSON.parse(localStorage.getItem("loginInfo"));
+
   return (
     <div className="App">
       <ToastContainer
@@ -25,7 +28,7 @@ function App() {
       />
       <ThemeProvider theme={theme}>
         <QueryClientProvider client={queryClient}>
-          <UserRoute />
+          {loginInfo?.isAdmin ? <AppRoute /> : <UserRoute />}
         </QueryClientProvider>
       </ThemeProvider>
     </div>
