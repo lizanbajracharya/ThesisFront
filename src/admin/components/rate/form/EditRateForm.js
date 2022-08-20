@@ -6,19 +6,19 @@ import {
   DialogTitle,
 } from "@mui/material";
 import React from "react";
-import { useProductEditForm } from "../../../hooks/components/product/form/useProductEditForm";
-import ProductFormItem from "./item/ProductFormItem";
+import { useRateEditForm } from "../../../hooks/components/brand/form/useRateEditForm";
+import RateFormItem from "./items/RateFormItem";
 
-const EditProductForm = ({ data, open, handleClose }) => {
-  const { formik, setImage, image } = useProductEditForm(data);
+const EditRateForm = ({ open, handleClose, data }) => {
+  const { formik } = useRateEditForm(data);
   const buttonStyle = {
     margin: "8px 0",
   };
   return (
     <Dialog open={open} onClose={() => handleClose()}>
-      <DialogTitle>Edit Product</DialogTitle>
+      <DialogTitle>Edit Rate</DialogTitle>
       <DialogContent>
-        <ProductFormItem formik={formik} setImage={setImage} image={image} />
+        <RateFormItem formik={formik} />
       </DialogContent>
       <DialogActions>
         <Button
@@ -27,15 +27,16 @@ const EditProductForm = ({ data, open, handleClose }) => {
           id="submitButton"
           color="primary"
           style={buttonStyle}
+          disabled={!(formik.isValid && formik.dirty)}
           onClick={() => {
             formik.submitForm();
             handleClose();
           }}>
-          Update
+          Submit
         </Button>
       </DialogActions>
     </Dialog>
   );
 };
 
-export default EditProductForm;
+export default EditRateForm;

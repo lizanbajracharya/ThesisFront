@@ -10,7 +10,15 @@ export const createRates = async (formData) => {
   return data;
 };
 
-export const updateRates = async (id, formData) => {
-  const { data } = await axiosInstance.put(`/api/rates/${id}`, formData);
+export const updateRates = async (formData) => {
+  const { data } = await axiosInstance.put(
+    `/api/rates/${formData?.id}`,
+    formData
+  );
+  return data;
+};
+
+export const deleteRate = async (id) => {
+  const { data } = await axiosInstance.dette(`/api/rates/${id}`);
   return data;
 };

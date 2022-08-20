@@ -50,15 +50,15 @@ const ProductFormItem = ({ formik, setImage, setColor, image }) => {
             margin="normal"
             required
             fullWidth
-            name="price"
-            label="Price"
-            id="price"
-            value={formik.values.price}
+            name="weight"
+            label="Weight"
+            id="weight"
+            value={formik.values.weight}
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
-            error={formik.touched.price && Boolean(formik.errors.price)}
-            helperText={formik.touched.price && formik.errors.price}
-            autoComplete="current-price"
+            error={formik.touched.weight && Boolean(formik.errors.weight)}
+            helperText={formik.touched.weight && formik.errors.weight}
+            autoComplete="current-weight"
           />
         </Grid>
       </Grid>

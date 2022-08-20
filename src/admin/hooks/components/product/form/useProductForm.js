@@ -14,7 +14,7 @@ export const useProductForm = () => {
     initialValues: {
       name: "",
       description: "",
-      price: "",
+      weight: "",
       countInStock: "",
     },
     validationSchema: productSchema,

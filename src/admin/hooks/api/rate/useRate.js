@@ -1,6 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import { toast } from "react-toastify";
-import { createRates, updateRates, getRates } from "../../../api/rate";
+import {
+  createRates,
+  updateRates,
+  getRates,
+  deleteRate,
+} from "../../../api/rate";
 
 export const useGetRate = () => {
   return useQuery(["getRates"], () => getRates(), {
@@ -26,18 +31,28 @@ export const useCreateRate = ({ onSuccess }) => {
 
 export const useUpdateRate = ({ onSuccess }) => {
   const queryClient = useQueryClient();
-  return useMutation(
-    ["updateRates"],
-    (id, formData) => updateRates(id, formData),
-    {
-      onSuccess: (data, variables, context) => {
-        queryClient.invalidateQueries(["getRates"]);
-        toast.success("Succesfully update rates");
-        onSuccess && onSuccess(data, variables, context);
-      },
-      onError: (err, _variables, _context) => {
-        toast.error(`error: ${err.message}`);
-      },
-    }
-  );
+  return useMutation(["updateRates"], (formData) => updateRates(formData), {
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries(["getRates"]);
+      toast.success("Succesfully update rates");
+      onSuccess && onSuccess(data, variables, context);
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
+};
+
+export const useDeleteRate = ({ onSuccess }) => {
+  const queryClient = useQueryClient();
+  return useMutation(["deleteRate"], (id) => deleteRate(id), {
+    onSuccess: (data, variables, context) => {
+      queryClient.invalidateQueries(["getRates"]);
+      toast.success("Succesfully deleted rates");
+      onSuccess && onSuccess(data, variables, context);
+    },
+    onError: (err, _variables, _context) => {
+      toast.error(`error: ${err.message}`);
+    },
+  });
 };

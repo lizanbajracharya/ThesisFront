@@ -6,11 +6,9 @@ import { productSchema } from "./productValidationSchema";
 export const useProductEditForm = (data) => {
   const { mutate } = useUpdateProduct({});
   const [image, setImage] = useState();
-  const [color, setColor] = useState([]);
 
   useEffect(() => {
     setImage(data && data?.image);
-    setColor(data && data?.color.map((p) => p?._id));
   }, [data]);
 
   const formik = useFormik({
@@ -18,7 +16,7 @@ export const useProductEditForm = (data) => {
       name: data && data?.name,
       brand: data && data?.brand?._id,
       description: data && data?.description,
-      price: data && data?.price,
+      weight: data && data?.weight,
       countInStock: data && data?.countInStock,
     },
     validationSchema: productSchema,
@@ -34,7 +32,6 @@ export const useProductEditForm = (data) => {
     const formData = {
       ...values,
       image: image,
-      color: color,
       id: data?._id,
     };
     mutate(formData);
@@ -43,8 +40,6 @@ export const useProductEditForm = (data) => {
   return {
     formik,
     setImage,
-    setColor,
-    color,
     image,
   };
 };
